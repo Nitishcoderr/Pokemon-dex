@@ -7,15 +7,25 @@ const PokemonList = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const POKEDEX_URL = 'https://pokeapi.co/api/v2/pokemon'; // This downlod list of 20 pokemon
+  const [nexturl, setnextUrl] = useState('')
+  const [prevUrl, setPrevUrl] = useState('')
+
+  const [pokedexUrl, setPokedexUrl] = useState('https://pokeapi.co/api/v2/pokemon')
+// This downlod list of 20 pokemon
 
   const downlodLoadPokemon = async () => {
-    const response = await axios.get(POKEDEX_URL);
+    setIsLoading(true)
+    const response = await axios.get(pokedexUrl);
     const pokemonResults = response.data.results; // we get the array of pokemon from results
+
+    console.log(response.data);
+    setnextUrl(response.data.next);
+    setPrevUrl(response.data.previous);
 
     // iterating over the array of pokemon,and using their url,to create an array of promises
     // that will downlod those 20 pokemon
     const pokemonResultPromise = pokemonResults.map((pokemon) => axios.get(pokemon.url));
+
 
     // Passing that promise array to aios.all
     const pokemonData = await axios.all(pokemonResultPromise); // array of 20 pokemon detailed data
@@ -40,7 +50,7 @@ const PokemonList = () => {
 
   useEffect(() => {
     downlodLoadPokemon();
-  }, []);
+  }, [pokedexUrl]);
 
   return (
     <div className="pokemon-list-wrapper">
@@ -56,8 +66,8 @@ const PokemonList = () => {
             ))}
       </div>
       <div className='controls'>
-        <button>Next</button>
-        <button>Previous</button>
+        <button disabled={prevUrl == null} onClick={()=> setPokedexUrl(prevUrl)} >Previous</button>
+        <button disabled={nexturl == null} onClick={()=> setPokedexUrl(nexturl)} >Next</button>
       </div>
     </div>
   );

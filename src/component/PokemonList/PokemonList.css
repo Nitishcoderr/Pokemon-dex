@@ -55,3 +55,8 @@
 .controls button:hover{
     background-color: rgb(121, 100, 141);
 }
+.controls button:disabled{
+    background-color: rgb(140, 137, 143);
+    cursor: not-allowed;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px -20px -30px;
+}
