@@ -4,7 +4,7 @@ import './Search.css'
 const Search = () => {
   return (
     <div className='searchWrapper'>
-      <input id='pokemon-name-search' type="text" placeholder='pokemon name...' />
+      <input autoFocus id='pokemon-name-search' type="text" placeholder='pokemon name...' />
     </div>
   )
 }
