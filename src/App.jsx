@@ -1,12 +1,13 @@
+import {BrowserRouter as Router} from 'react-router-dom'
 import './App.css'
-import Pokedex from './component/Pokedex/Pokedex'
+import CustomRoutes from './Routes/CustomRoutes'
 
 function App() {
 
   return (
-   <>
-   <Pokedex/>
-   </>
+   <Router>
+    <CustomRoutes/>
+   </Router>
   )
 }
 

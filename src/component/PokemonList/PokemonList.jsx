@@ -62,6 +62,7 @@ const PokemonList = () => {
                 name={p.name}
                 image={p.image}
                 key={p.id}
+                id={p.id}
               />
             ))}
       </div>
