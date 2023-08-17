@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import usePokemonDetails from '../../hooks/usePokemonDetails';
 
 
-const PokemonDetails = () => {
+const PokemonDetails = ({pokemonName}) => {
   const { id } = useParams();
-  const [pokemon] = usePokemonDetails(id)
+  const [pokemon] = usePokemonDetails(id,pokemonName)
 
 
 
@@ -28,7 +28,7 @@ const PokemonDetails = () => {
         <div>
           More {pokemon.types[0]} type pokemons
           <ul>{
-            pokemon.similarPokemons.map((p)=> <li key={p.pokemon.id} >
+            pokemon.similarPokemons.map((p)=> <li key={p.pokemon.url} >
               {p.pokemon.name}
             </li> )
             

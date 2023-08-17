@@ -1,10 +1,13 @@
 import React from 'react'
 import './Search.css'
+import useDebounce from '../../hooks/useDebounce'
 
-const Search = () => {
+const Search = ({updateSearchTerm}) => {
+  const debounceCallback = useDebounce((e)=>updateSearchTerm(e.target.value))
+
   return (
     <div className='searchWrapper'>
-      <input autoFocus id='pokemon-name-search' type="text" placeholder='pokemon name...' />
+      <input onChange={debounceCallback} autoFocus id='pokemon-name-search' type="text" placeholder='pokemon name...' />
     </div>
   )
 }
